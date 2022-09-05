@@ -27,7 +27,6 @@ class Transform:
         cases_stdev = daily_data['new_cases_per_million'].std()
         daily_data['cases_standard_score'] = np_abs(daily_data['new_cases_per_million'] - cases_mean) / cases_stdev
         #re-order cols
-        daily_data = daily_data[['location', 'date', 'new_cases_per_million', 
-        'cases_standard_score','new_tests_per_million']]
+        daily_data = daily_data[['location','date','new_cases_per_million','cases_standard_score','new_tests_per_million']]
         print(daily_data)
         return daily_data
