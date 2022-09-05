@@ -18,6 +18,7 @@ class Transform:
         The metrics are good for realizing each country's cases per population, in relation to most other countries.
         """
         daily_data = self.data.copy()
+        print(daily_data)
         daily_data.dropna(axis='rows', subset=['new_cases_per_million'], inplace=True)
         daily_data['new_tests_per_million'] = daily_data['new_tests_per_thousand'] / 1000
         del daily_data['new_tests_per_thousand']
@@ -28,4 +29,5 @@ class Transform:
         #re-order cols
         daily_data = daily_data[['location', 'date', 'new_cases_per_million', 
         'cases_standard_score','new_tests_per_million']]
+        print(daily_data)
         return daily_data

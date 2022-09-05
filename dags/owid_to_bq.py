@@ -1,10 +1,10 @@
+import datetime as dt
 from extract import Extract
 from transform import Transform
 from load import Load
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.contrib.operators.bigquery_check_operator import BigQueryCheckOperator
-import datetime as dt
 
 
 default_args = {
@@ -26,8 +26,10 @@ def run_etl(ds=None):
     #for each day, load the previous day
     extract = Extract(dt.datetime.strptime(ds,'%Y-%m-%d'))
     df = extract.execute_extraction()
+    print(f'df: {df}')
     transform = Transform(df)
     transformed_df = transform.transform_data()
+    print(f'transformed_df: {transformed_df}')
     load = Load(transformed_df)
     load.load()
 
@@ -41,7 +43,7 @@ t2 = BigQueryCheckOperator(
     task_id="check_bigquery",
     sql="""
     SELECT COUNT(*) 
-    FROM swift-casing-360117.your_dataset.owid t
+    FROM your_dataset.owid t
     where t.date = parse_timestamp('%Y-%m-%d', '{{ds}}')
     """,
     use_legacy_sql=False,

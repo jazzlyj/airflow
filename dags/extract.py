@@ -1,5 +1,6 @@
-import pandas as pd
 import datetime as dt
+import pandas as pd
+
 
 class Extract:
     OWID_CSV_PATH = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv'
