@@ -1,4 +1,3 @@
-import os
 from extract import Extract
 from transform import Transform
 from load import Load
@@ -6,8 +5,6 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.contrib.operators.bigquery_check_operator import BigQueryCheckOperator
 import datetime as dt
-
-
 
 
 default_args = {
